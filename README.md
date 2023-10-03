@@ -1,6 +1,6 @@
 <div align="center">
 <h1 align="center">
-<br>Arch Linux Post Install
+<br>Arch Post Install
 </h1>
 <h3>◦ Developed with the software and tools below.</h3>
 
@@ -120,9 +120,10 @@ chmod +x main.sh
 ---
 
 
-## 🤝 Contributing
+## 📄 License
 
+Distributed under the GNU License. See LICENSE.md for more information.
+
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 
 ---
-
-
