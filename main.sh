@@ -20,7 +20,7 @@ EOL
 fi
 
 # Set Version
-JETBRAINS_VERSION=2023.2
+JETBRAINS_VERSION=2023.3.2
 POSTMAN_VERSION=10.17
 MAVEN=3
 MAVEN_VERSION=3.9.4
@@ -44,7 +44,8 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm tree \
 	curl \
 	wget \
-	tree
+	tree \
+  usbutils
 
 # Install Bluetooth Driver
 pacman -S --noconfirm bluez \
@@ -92,18 +93,26 @@ pacman -S --noconfirm libreoffice
 pacman -S --noconfirm openvpn
 pacman -S --noconfirm networkmanager-openvpn
 
+# Install Zoom
+wget https://zoom.us/client/5.16.2.8828/zoom_x86_64.pkg.tar.xz
+pacman -U zoom_x86_64.pkg.tar.xz
+
 #
 pacman -S libappindicator-gtk3
 
-
 # Gnome Sound Recorder
 pacman -S gnome-sound-recorder
+
 
 # Install AUR
 cd ~
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+
+# Insall Snap
+yay -S snapd
+systemctl start snapd.service
 
 # Install Google Chrome
 yay -S google-chrome
@@ -165,15 +174,16 @@ source /etc/profile.d/gradle.sh
 
 # Install IntelliJ IDEA
 wget https://download.jetbrains.com/idea/ideaIU-${JETBRAINS_VERSION}.tar.gz -O ideaIU.tar.gz
-tar -xzf ideaIU.tar.gz -C /opt
+tar -xf ideaIU.tar.gz -C /opt
 mv /opt/idea-IU-* /opt/idea-IU-${JETBRAINS_VERSION}
-ln -s /opt/idea-IU-${JETBRAINS_VERSION}/bin/idea.sh /usr/local/bin/idea
+ln -s /opt/idea-IU-${JETBRAINS_VERSION} /opt/idea
+ln -s /opt/idea/bin/idea.sh /usr/local/bin/idea
 echo "[Desktop Entry]
           Version=1.0
           Type=Application
           Name=IntelliJ IDEA Ultimate Edition
-          Icon=/opt/idea-IU-${JETBRAINS_VERSION}/bin/idea.svg
-          Exec=/opt/idea-IU-${JETBRAINS_VERSION}/bin/idea.sh %f
+          Icon=/opt/idea/bin/idea.svg
+          Exec=/opt/idea/bin/idea.sh %f
           Comment=Capable and Ergonomic IDE for JVM
           Categories=Development;IDE;
           Terminal=false
@@ -192,7 +202,6 @@ echo "[Desktop Entry]
           Type=Application
           Categories=Development;" >>/usr/share/applications/Postman.desktop
 
-
 # Install Docker
 pacman -S --noconfirm docker
 docker version
@@ -202,12 +211,28 @@ systemctl enable docker.service
 usermod -aG docker $USER
 pacman -S --noconfirm docker-compose
 
-
-
 # Install Flatpak Repository
 pacman -S --noconfirm flatpak
 
+# Install Droidcam
+wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.1.1.zip
+unzip droidcam_latest.zip -d droidcam
+cd droidcam && ./install-client
+cd ..
+pacman -S --noconfirm android-tools v4l2loopback-dkms ffmpeg android-udev --needed
+pacman -S --noconfirm linux-headers
+
 
 # Install Nvidia Driver
-pacman -S nvidia \
-	nvidia-settings
+# pacman -S nvidia \
+# nvidia-settings
+
+
+# Install ZSH & Oh My ZSH
+pacman -S --noconfirm zsh
+chsh -s /usr/bin/zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+pacman -S --noconfirm powerline-fonts
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
