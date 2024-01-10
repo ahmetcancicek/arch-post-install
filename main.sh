@@ -127,16 +127,20 @@ yay -S visual-studio-code-bin
 yay -S android-tools
 
 # Install JAVA
-pacman -S --noconfirm jre-openjdk
+pacman -S --noconfirm jdk-openjdk
 archlinux-java status
-wget https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.tar.gz
-tar xf jdk-20_linux-x64_bin.tar.gz -C /usr/lib/jvm
-touch /etc/profile.d/jdk20.sh
-echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk20.sh
-echo 'JAVA_HOME=/usr/lib/jvm/jdk-20.0.2' >> /etc/profile.d/jdk20.sh
-chmod +x /etc/profile.d/jdk20.sh
-source /etc/profile.d/jdk20.sh
-archlinux-java set jdk-20.0.1
+wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
+tar xf jdk-21_linux-x64_bin.tar.gz -C /usr/lib/jvm
+touch /etc/profile.d/jdk21.sh
+echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk21.sh
+echo 'JAVA_HOME=/usr/lib/jvm/jdk-20.0.2' >> /etc/profile.d/jdk21.sh
+chmod +x /etc/profile.d/jdk21.sh
+source /etc/profile.d/jdk21.sh
+archlinux-java set jdk-21.0.1
+
+wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+tar xf jdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm
+
 
 # Install Sprint CLI
 wget https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-cli/${SPRING_VERSION}/spring-boot-cli-${SPRING_VERSION}-bin.tar.gz
