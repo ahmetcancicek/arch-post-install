@@ -140,6 +140,13 @@ chmod +x main.sh
 ./main.sh
 ```
 
+**For Fonts**
+
+```sh
+chmod +x fonts.sh
+./fonts.sh
+```
+
 ---
 
 
