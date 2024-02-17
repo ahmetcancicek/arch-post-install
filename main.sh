@@ -96,6 +96,9 @@ pacman -S --noconfirm gnome-shell-extensions
 pacman -S --noconfirm gnome-browser-connector
 pacman -S --noconfirm gnome-themes-extra
 
+# Install Chromium
+pacman -S --noconfirm firefox
+
 # Install Google Chrome
 yay -S google-chrome
 
