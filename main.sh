@@ -86,6 +86,8 @@ makepkg -si
 
 # Insall Snap
 yay -S snapd
+systemctl enable --now snapd.socket
+ln -s /var/lib/snapd/snap /snap
 systemctl start snapd.service
 
 # Install Flatpak Repository
@@ -119,10 +121,10 @@ yay -S brave-bin
 
 # Install Zoom
 wget https://zoom.us/client/5.16.2.8828/zoom_x86_64.pkg.tar.xz
-pacman -U zoom_x86_64.pkg.tar.xz
+pacman -U --noconfirm zoom_x86_64.pkg.tar.xz
 
 # Install Discord
-flatpak install discord
+pacman -S discord
 
 # Install Thunderbird
 pacman -S --noconfirm thunderbird
