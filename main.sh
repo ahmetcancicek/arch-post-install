@@ -59,7 +59,7 @@ essentials=(
 )
 printf "\n${BLUE}========================Installing standard package $1========================${ENDCOLOR}\n"
 for key in "${essentials[@]}"; do
-  pacman -S $key
+  pacman -S --noconfirm $key
 done
 printf "\n${BLUE}===============Standard packages are installed successfully=============== ${ENDCOLOR}\n"
 
