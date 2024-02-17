@@ -30,33 +30,48 @@ The project located at https://github.com/ahmetcancicek/arch-post-install automa
 
 * Curl
 * Wget
-* Tree
-* VIM
-* Gnome Boxes
-* Terminator
-* GIMP
-* GIT
-* Thunderbird
-* KeePassXC
-* Gnome Boxes
-* Spotify
-* LibreOffice
-* OpenVPN
-* Gnome Sound Recorder
-* Yay
+* ZSH
+* HTOP
+* Snap
+* Flatpak
 * Google Chrome
-* Visual Studio Code
-* Android Tools
+* Chromium
+* Spotify
+* Opera
+* Microsoft Edge
+* Brave
+* Zoom
+* Discord
+* Thunderbird
+* GIT
 * OpenJDK
 * Oracle Java JDK
 * Spring CLI
-* Maven
-* Gradle
+* Go
+* VSCODE
 * IntelliJ IDEA Ultimate
 * Postman
 * Docker
-* Flatpak Repository
-* Nvidia Driver
+* Maven
+* Gradle
+* VIM
+* DataGrip
+* Gnome Tweak Tool
+* Dropbox
+* KeePassXC
+* VirtualBox
+* Gnome Boxes
+* Terminator
+* Web Apps
+* OpenVPN
+* Timeshift
+* Gparted
+* GIMP
+* Droidcam
+* Kdenlive
+* Krita
+* Inkscape
+* LibreOffice
 
 </details>
 
@@ -93,6 +108,14 @@ The project located at https://github.com/ahmetcancicek/arch-post-install automa
 
 
 ## 🚀 Getting Started
+
+***Dependencies***
+
+Please ensure you have the following dependencies installed on your system:
+
+```sh
+sudo pacman -S git
+```
 
 ### 🔧 Installation
 
