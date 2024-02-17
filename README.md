@@ -137,14 +137,14 @@ chmod +x main.sh
 ### 🤖 Running arch-post-install
 
 ```sh
-./main.sh
+sudo ./main.sh
 ```
 
 **For Fonts**
 
 ```sh
 chmod +x fonts.sh
-./fonts.sh
+sudo ./fonts.sh
 ```
 
 ---
