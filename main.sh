@@ -161,7 +161,7 @@ pacman -S --noconfirm gnome-boxes
 
 # Install VirtualBox
 pacman -S --noconfirm virtualbox-host-modules-arch
-pacman -S virtualbox
+pacman -S --noconfirm virtualbox
 modprobe vboxdrv
 
 # Install LibreOffice
