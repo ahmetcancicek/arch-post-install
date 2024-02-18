@@ -91,22 +91,7 @@ systemctl start bluetooth.service
 systemctl enable bluetooth.service
 print_installation_message_success Bluetooth
 
-# Install AUR
-print_installation_message AUR
-cd ~
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-print_installation_message_success AUR
-
-# Insall Snap
-print_installation_message Snap
-yay -S snapd
-systemctl enable --now snapd.socket
-ln -s /var/lib/snapd/snap /snap
-systemctl start snapd.service
-print_installation_message_success Snap
-
+# Install Flatpak
 print_installation_message Flatpak
 # Install Flatpak Repository
 pacman -S --noconfirm flatpak
@@ -124,11 +109,6 @@ print_installation_message Firefox
 pacman -S --noconfirm firefox
 print_installation_message_success Firefox
 
-# Install Google Chrome
-print_installation_message Chrome
-yay -S google-chrome
-print_installation_message_success Chrome
-
 # Install Chromium
 print_installation_message Chromium
 pacman -S --noconfirm chromium
@@ -144,16 +124,6 @@ print_installation_message Opera
 pacman -S --noconfirm opera
 print_installation_message_success Opera
 
-# Install Microsoft Edge
-print_installation_message Edge
-yay -S microsoft-edge-stable
-print_installation_message_success Edge
-
-# Install Brave
-print_installation_message Brave
-yay -S brave-bin
-print_installation_message_success Brave
-
 # Install Zoom
 print_installation_message Zoom
 wget https://zoom.us/client/5.16.2.8828/zoom_x86_64.pkg.tar.xz
@@ -162,7 +132,7 @@ print_installation_message_success Zoom
 
 # Install Discord
 print_installation_message Discord
-pacman -S discord
+pacman -S --noconfirm discord
 print_installation_message_success Discord
 
 # Install Thunderbird
@@ -190,25 +160,10 @@ print_installation_message Terminator
 pacman -S --noconfirm terminator
 print_installation_message_success Terminator
 
-# Install Web Apps
-print_installation_message WebApps
-yay -S webapp-manager
-print_installation_message_success WebApps
-
 # Install GIMP
 print_installation_message GIMP
 pacman -S --noconfirm gimp
 print_installation_message_success GIMP
-
-# Install Dropbox
-print_installation_message Dropbox
-yay -S dropbox
-print_installation_message_success Dropbox
-
-# Install pCloud
-print_installation_message pCloud
-yay -S pcloud-drive
-print_installation_message_success pCloud
 
 # Install KeePassXC
 print_installation_message KeePassXC
@@ -247,21 +202,6 @@ print_installation_message SoundRecorder
 pacman -S --noconfirm gnome-sound-recorder
 print_installation_message_success SoundRecorder
 
-# Install Galaxy Buds Client
-print_installation_message galaxybudsclient
-yay -S galaxybudsclient-bin
-print_installation_message_success galaxybudsclient
-
-# Install VSCODE
-print_installation_message VSCODE
-yay -S visual-studio-code-bin
-print_installation_message_success VSCODE
-
-# Android Tools
-print_installation_message AndroidTools
-yay -S android-tools
-print_installation_message_success AndroidTools
-
 # Install Timeshift
 print_installation_message Timeshift
 pacman -S --noconfirm timeshift
@@ -296,6 +236,7 @@ print_installation_message_success Raindrop
 print_installation_message Anki
 pacman -S --noconfirm zstd
 wget https://github.com/ankitects/anki/releases/download/23.12.1/anki-${ANKI_VERSION}-linux-qt6.tar.zst -O anki.tar.zst
+# pacman -U --noconfirm anki.tar.zst
 tar xaf anki.tar.zst
 cd anki-${ANKI_VERSION}-linux-qt6
 sudo ./install.sh
