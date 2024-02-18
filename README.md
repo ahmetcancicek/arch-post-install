@@ -84,6 +84,7 @@ The project located at https://github.com/ahmetcancicek/arch-post-install automa
 └── arch-post-install/
     ├── .gitignore
     ├── LICENSE
+    ├── Makefile    
     ├── README.md
     ├── fonts.sh
     └── main.sh
@@ -96,10 +97,11 @@ The project located at https://github.com/ahmetcancicek/arch-post-install automa
 
 <details closed><summary>Root</summary>
 
-| File                                                                              | Summary                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---                                                                               | ---                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| File                                                                              | Summary                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [main.sh](https://github.com/ahmetcancicek/arch-post-install/blob/main/main.sh)   | The code in main.sh performs a series of installations and configurations for various software and tools. It installs essential packages, Bluetooth driver, GNOME extensions, Vim, Gnome-Boxes, GIMP, Git, Thunderbird, KeePassXC, Spotify, LibreOffice, OpenVPN, and more. It also installs Java, Spring CLI, Maven, Gradle, IntelliJ IDEA, and Postman. Additionally, it installs Docker, Flatpak repository, and Nvidia driver. |
-| [fonts.sh](https://github.com/ahmetcancicek/arch-post-install/blob/main/fonts.sh) | This code installs various fonts including Powerline Fonts, Roboto, Noto Sans, Fira Mono, Clear Sans, Fira Sans, Roboto Slab, Overpass, Ubuntu, Ubuntu Mono, Ubuntu Condensed, Overpass Mono, JetBrains Mono, Inter, Hack, Monaco, and MesloLGS.                                                                                                                                                                                   |
+| [aur.sh](https://github.com/ahmetcancicek/arch-post-install/blob/main/main.sh)    | The code installs the Arch User Repository (AUR) and a series of installations from the AUR repository.                                                                                                                                                                                                                                                                                                                                                              |
+| [fonts.sh](https://github.com/ahmetcancicek/arch-post-install/blob/main/fonts.sh) | This code installs various fonts including Powerline Fonts, Roboto, Noto Sans, Fira Mono, Clear Sans, Fira Sans, Roboto Slab, Overpass, Ubuntu, Ubuntu Mono, Ubuntu Condensed, Overpass Mono, JetBrains Mono, Inter, Hack, Monaco, and MesloLGS.                                                                                                                                                                                  |
 
 </details>
 
