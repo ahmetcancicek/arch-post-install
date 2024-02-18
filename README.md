@@ -114,7 +114,7 @@ The project located at https://github.com/ahmetcancicek/arch-post-install automa
 Please ensure you have the following dependencies installed on your system:
 
 ```sh
-sudo pacman -S git
+sudo pacman -S git make
 ```
 
 ### 🔧 Installation
@@ -129,22 +129,16 @@ git clone https://github.com/ahmetcancicek/arch-post-install
 cd arch-post-install
 ```
 
-3. Install the dependencies:
-```sh
-chmod +x main.sh
-```
-
 ### 🤖 Running arch-post-install
 
 ```sh
-sudo ./main.sh
+make run
 ```
 
 **For Fonts**
 
 ```sh
-chmod +x fonts.sh
-sudo ./fonts.sh
+make install-fonts
 ```
 
 ---
