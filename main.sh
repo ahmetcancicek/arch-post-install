@@ -91,6 +91,14 @@ systemctl start bluetooth.service
 systemctl enable bluetooth.service
 print_installation_message_success Bluetooth
 
+# Insall Snap
+print_installation_message Snap
+yes | yay -S snapd
+systemctl enable --now snapd.socket
+ln -s /var/lib/snapd/snap /snap
+systemctl start snapd.service
+print_installation_message_success Snap
+
 # Install Flatpak
 print_installation_message Flatpak
 # Install Flatpak Repository
@@ -113,6 +121,22 @@ print_installation_message_success Firefox
 print_installation_message Chromium
 pacman -S --noconfirm chromium
 print_installation_message_success Chromium
+
+# Install Google Chrome
+print_installation_message Chrome
+yes |  yay -S google-chrome
+# yay -S google-chrome --answerdiff=None
+print_installation_message_success Chrome
+
+# Install Microsoft Edge
+print_installation_message Edge
+yes | yay -S microsoft-edge-stable
+print_installation_message_success Edge
+
+# Install Brave
+print_installation_message Brave
+yes | yay -S brave-bin
+print_installation_message_success Brave
 
 # Install Spotify
 print_installation_message Spotify
@@ -145,6 +169,16 @@ print_installation_message GIT
 pacman -S --noconfirm  git
 print_installation_message_success GIT
 
+# Install VSCODE
+print_installation_message VSCODE
+yes | yay -S visual-studio-code-bin
+print_installation_message_success VSCODE
+
+# Android Tools
+print_installation_message AndroidTools
+yes | yay -S android-tools
+print_installation_message_success AndroidTools
+
 # Install Vim
 print_installation_message Vim
 pacman -S --noconfirm vim
@@ -169,6 +203,26 @@ print_installation_message_success GIMP
 print_installation_message KeePassXC
 pacman -S --noconfirm keepassxc
 print_installation_message_success KeePassXC
+
+# Install Web Apps
+print_installation_message WebApps
+yes | yay -S webapp-manager
+print_installation_message_success WebApps
+
+# Install Dropbox
+print_installation_message Dropbox
+yes | yay -S dropbox
+print_installation_message_success Dropbox
+
+# Install pCloud
+print_installation_message pCloud
+yes | yay -S pcloud-drive
+print_installation_message_success pCloud
+
+# Install Galaxy Buds Client
+print_installation_message galaxybudsclient
+yes | yay -S galaxybudsclient-bin
+print_installation_message_success galaxybudsclient
 
 # Install Gnome Boxes
 print_installation_message Boxes
@@ -385,16 +439,6 @@ print_installation_message_success Droidcam
 # pacman -S nvidia \
 # nvidia-settings
 
-# Install ZSH & Oh My ZSH
-print_installation_message ZSH
-pacman -S --noconfirm zsh
-chsh -s /usr/bin/zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-pacman -S --noconfirm powerline-fonts
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-print_installation_message_success ZSH
 
 printf "\n${GREEN}"
 cat <<EOL
