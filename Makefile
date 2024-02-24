@@ -1,6 +1,4 @@
 run:
-	chmod +x ./aur.sh
-	./aur.sh
 	chmod +x ./main.sh
 	sudo ./main.sh
 install-main:
