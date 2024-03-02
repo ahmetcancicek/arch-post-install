@@ -56,7 +56,9 @@ essentials=(
   base-devel
   ntfsprogs
   dosfstools
+  dialog
 )
+
 printf "\n${BLUE}========================Installing standard package $1========================${ENDCOLOR}\n"
 for key in "${essentials[@]}"; do
   pacman -S --noconfirm $key
@@ -83,362 +85,408 @@ print_installation_message_success() {
 
 
 # Install Bluetooth Driver
-print_installation_message Bluetooth
-pacman -S --noconfirm bluez \
-	bluez-utils \
-	blueman
-systemctl start bluetooth.service
-systemctl enable bluetooth.service
-print_installation_message_success Bluetooth
+install_bluetooth(){
+  print_installation_message Bluetooth
+  pacman -S --noconfirm bluez \
+  	bluez-utils \
+  	blueman
+  systemctl start bluetooth.service
+  systemctl enable bluetooth.service
+  print_installation_message_success Bluetooth
+}
 
-# Insall Snap
-print_installation_message Snap
-yes | yay -S snapd
-systemctl enable --now snapd.socket
-ln -s /var/lib/snapd/snap /snap
-systemctl start snapd.service
-print_installation_message_success Snap
+# Flatpak Repository
+install_flatpak() {
+  # Install Flatpak
+  print_installation_message Flatpak
+  # Install Flatpak Repository
+  pacman -S --noconfirm flatpak
+  print_installation_message_success Flatpak
+}
 
-# Install Flatpak
-print_installation_message Flatpak
-# Install Flatpak Repository
-pacman -S --noconfirm flatpak
-print_installation_message_success Flatpak
+# Gnome
+install_gnome_tool() {
+  # GNOME Extensions
+  print_installation_message Extensions
+  pacman -S --noconfirm gnome-shell-extensions
+  pacman -S --noconfirm gnome-browser-connector
+  pacman -S --noconfirm gnome-themes-extra
+  print_installation_message_success Extensions
+}
 
-# GNOME Extensions
-print_installation_message Extensions
-pacman -S --noconfirm gnome-shell-extensions
-pacman -S --noconfirm gnome-browser-connector
-pacman -S --noconfirm gnome-themes-extra
-print_installation_message_success Extensions
+# Firefox
+install_firefox(){
+  # Install Firefox
+  print_installation_message Firefox
+  pacman -S --noconfirm firefox
+  print_installation_message_success Firefox
+}
 
-# Install Firefox
-print_installation_message Firefox
-pacman -S --noconfirm firefox
-print_installation_message_success Firefox
+# Chromium
+install_chromium() {
+  # Install Chromium
+  print_installation_message Chromium
+  pacman -S --noconfirm chromium
+  print_installation_message_success Chromium
+}
 
-# Install Chromium
-print_installation_message Chromium
-pacman -S --noconfirm chromium
-print_installation_message_success Chromium
+# Spotify
+install_spotify() {
+  print_installation_message Spotify
+  pacman -S --noconfirm spotify-launcher
+  print_installation_message_success Spotify
+}
 
-# Install Google Chrome
-print_installation_message Chrome
-yes |  yay -S google-chrome
-# yay -S google-chrome --answerdiff=None
-print_installation_message_success Chrome
+# Opera
+install_opera() {
+  print_installation_message Opera
+  pacman -S --noconfirm opera
+  print_installation_message_success Opera
+}
 
-# Install Microsoft Edge
-print_installation_message Edge
-yes | yay -S microsoft-edge-stable
-print_installation_message_success Edge
+# Zoom
+install_zoom() {
+  print_installation_message Zoom
+  wget https://zoom.us/client/5.16.2.8828/zoom_x86_64.pkg.tar.xz
+  pacman -U --noconfirm zoom_x86_64.pkg.tar.xz
+  print_installation_message_success Zoom
+}
 
-# Install Brave
-print_installation_message Brave
-yes | yay -S brave-bin
-print_installation_message_success Brave
+# Discord
+install_discord() {
+  print_installation_message Discord
+  pacman -S --noconfirm discord
+  print_installation_message_success Discord
+}
 
-# Install Spotify
-print_installation_message Spotify
-pacman -S --noconfirm spotify-launcher
-print_installation_message_success Spotify
+# Thunderbird
+install_thunderbird() {
+  print_installation_message Thunderbird
+  pacman -S --noconfirm thunderbird
+  print_installation_message_success Thunderbird
+}
 
-# Install Opera
-print_installation_message Opera
-pacman -S --noconfirm opera
-print_installation_message_success Opera
+# GIT
+install_git() {
+  print_installation_message GIT
+  pacman -S --noconfirm  git
+  print_installation_message_success GIT
+}
 
-# Install Zoom
-print_installation_message Zoom
-wget https://zoom.us/client/5.16.2.8828/zoom_x86_64.pkg.tar.xz
-pacman -U --noconfirm zoom_x86_64.pkg.tar.xz
-print_installation_message_success Zoom
+# Vim
+install_vim() {
+  print_installation_message Vim
+  pacman -S --noconfirm vim
+  print_installation_message_success Vim
+}
 
-# Install Discord
-print_installation_message Discord
-pacman -S --noconfirm discord
-print_installation_message_success Discord
+# Gnome-Boxes
+install_gnome_boxes() {
+  print_installation_message Boxes
+  pacman -S --noconfirm gnome-boxes
+  print_installation_message_success Boxes
+}
 
-# Install Thunderbird
-print_installation_message Thunderbird
-pacman -S --noconfirm thunderbird
-print_installation_message_success Thunderbird
+# Terminator
+install_terminator() {
+  print_installation_message Terminator
+  pacman -S --noconfirm terminator
+  print_installation_message_success Terminator
+}
 
-# Install GIT
-print_installation_message GIT
-pacman -S --noconfirm  git
-print_installation_message_success GIT
+# Gimp
+install_gimp() {
+  print_installation_message GIMP
+  pacman -S --noconfirm gimp
+  print_installation_message_success GIMP
+}
 
-# Install VSCODE
-print_installation_message VSCODE
-yes | yay -S visual-studio-code-bin
-print_installation_message_success VSCODE
+# KeePassXC
+install_keepassxc() {
+  print_installation_message KeePassXC
+  pacman -S --noconfirm keepassxc
+  print_installation_message_success KeePassXC
+}
 
-# Android Tools
-print_installation_message AndroidTools
-yes | yay -S android-tools
-print_installation_message_success AndroidTools
+# VirtualBox
+install_virtualbox() {
+  print_installation_message VirtualBox
+  pacman -S --noconfirm virtualbox-host-modules-arch
+  pacman -S --noconfirm virtualbox
+  modprobe vboxdrv
+  print_installation_message_success VirtualBox
+}
 
-# Install Vim
-print_installation_message Vim
-pacman -S --noconfirm vim
-print_installation_message_success Vim
+# LibreOffice
+install_libreoffice(){
+    print_installation_message LibreOffice
+  pacman -S --noconfirm libreoffice
+  print_installation_message_success LibreOffice
+}
 
-# Install Gnome-Boxes
-print_installation_message Boxes
-pacman -S --noconfirm gnome-boxes
-print_installation_message_success Boxes
+# OpenVPN
+install_openvpn() {
+  print_installation_message OpenVPN
+  pacman -S --noconfirm openvpn
+  pacman -S --noconfirm networkmanager-openvpn
+  print_installation_message_success OpenVPN
+}
 
-# Install Terminator
-print_installation_message Terminator
-pacman -S --noconfirm terminator
-print_installation_message_success Terminator
-
-# Install GIMP
-print_installation_message GIMP
-pacman -S --noconfirm gimp
-print_installation_message_success GIMP
-
-# Install KeePassXC
-print_installation_message KeePassXC
-pacman -S --noconfirm keepassxc
-print_installation_message_success KeePassXC
-
-# Install Web Apps
-print_installation_message WebApps
-yes | yay -S webapp-manager
-print_installation_message_success WebApps
-
-# Install Dropbox
-print_installation_message Dropbox
-yes | yay -S dropbox
-print_installation_message_success Dropbox
-
-# Install pCloud
-print_installation_message pCloud
-yes | yay -S pcloud-drive
-print_installation_message_success pCloud
-
-# Install Galaxy Buds Client
-print_installation_message galaxybudsclient
-yes | yay -S galaxybudsclient-bin
-print_installation_message_success galaxybudsclient
-
-# Install Gnome Boxes
-print_installation_message Boxes
-pacman -S --noconfirm gnome-boxes
-print_installation_message_success Boxes
-
-# Install VirtualBox
-print_installation_message VirtualBox
-pacman -S --noconfirm virtualbox-host-modules-arch
-pacman -S --noconfirm virtualbox
-modprobe vboxdrv
-print_installation_message_success VirtualBox
-
-# Install LibreOffice
-print_installation_message LibreOffice
-pacman -S --noconfirm libreoffice
-print_installation_message_success LibreOffice
-
-# Install OpenVPN
-print_installation_message OpenVPN
-pacman -S --noconfirm openvpn
-pacman -S --noconfirm networkmanager-openvpn
-print_installation_message_success OpenVPN
-
-print_installation_message libappindicator
-pacman -S --noconfirm libappindicator-gtk3
-print_installation_message_success libappindicator
+install_libappindicator(){
+  print_installation_message libappindicator
+  pacman -S --noconfirm libappindicator-gtk3
+  print_installation_message_success libappindicator
+}
 
 # Gnome Sound Recorder
-print_installation_message SoundRecorder
-pacman -S --noconfirm gnome-sound-recorder
-print_installation_message_success SoundRecorder
+install_soundrecorder(){
+  print_installation_message SoundRecorder
+  pacman -S --noconfirm gnome-sound-recorder
+  print_installation_message_success SoundRecorder
+}
 
-# Install Timeshift
-print_installation_message Timeshift
-pacman -S --noconfirm timeshift
-print_installation_message_success Timeshift
+# Timeshift
+install_timeshift(){
+  print_installation_message Timeshift
+  pacman -S --noconfirm timeshift
+  print_installation_message_success Timeshift
+}
 
-# Install Gparted
-print_installation_message Gparted
-pacman -S --noconfirm gparted
-print_installation_message_success Gparted
+# Gparted
+install_gparted(){
+  print_installation_message Gparted
+  pacman -S --noconfirm gparted
+  print_installation_message_success Gparted
+}
 
-# Install Kdenlive
-print_installation_message Kdenlive
-pacman -S --noconfirm kdenlive
-print_installation_message_success Kdenlive
+# Kdenlive
+install_kdenlive(){
+  print_installation_message Kdenlive
+  pacman -S --noconfirm kdenlive
+  print_installation_message_success Kdenlive
+}
 
-# Install Krita
-print_installation_message Krita
-pacman -S --noconfirm krita
-print_installation_message_success Krita
+# Krita
+install_krita(){
+  print_installation_message Krita
+  pacman -S --noconfirm krita
+  print_installation_message_success Krita
+}
 
-# Install Inkscape
-print_installation_message Inkscape
-pacman -S --noconfirm inkscape
-print_installation_message_success Inkscape
+# Inkscape
+install_inkscape(){
+  print_installation_message Inkscape
+  pacman -S --noconfirm inkscape
+  print_installation_message_success Inkscape
+}
 
-# Install Raindrop
-print_installation_message Raindrop
-snap install raindrop
-print_installation_message_success Raindrop
+# Anki
+install_anki(){
+  print_installation_message Anki
+  pacman -S --noconfirm zstd
+  wget https://github.com/ankitects/anki/releases/download/23.12.1/anki-${ANKI_VERSION}-linux-qt6.tar.zst -O anki.tar.zst
+  # pacman -U --noconfirm anki.tar.zst
+  tar xaf anki.tar.zst
+  cd anki-${ANKI_VERSION}-linux-qt6
+  sudo ./install.sh
+  print_installation_message_success Anki
+}
 
-# Install Anki
-print_installation_message Anki
-pacman -S --noconfirm zstd
-wget https://github.com/ankitects/anki/releases/download/23.12.1/anki-${ANKI_VERSION}-linux-qt6.tar.zst -O anki.tar.zst
-# pacman -U --noconfirm anki.tar.zst
-tar xaf anki.tar.zst
-cd anki-${ANKI_VERSION}-linux-qt6
-sudo ./install.sh
-print_installation_message_success Anki
+# ORACLE JAVA JDK 18 &  ORACLE JAVA JDK 21 & ORACLE JAVA JDK 17 && SPRING BOOT CLI
+install_javaJDK() {
+  print_installation_message JAVA
+  pacman -S --noconfirm jdk-openjdk
+  archlinux-java status
+  wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
+  tar xf jdk-21_linux-x64_bin.tar.gz -C /usr/lib/jvm
+  touch /etc/profile.d/jdk21.sh
+  echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk21.sh
+  echo 'JAVA_HOME=/usr/lib/jvm/jdk-20.0.2' >> /etc/profile.d/jdk21.sh
+  chmod +x /etc/profile.d/jdk21.sh
+  source /etc/profile.d/jdk21.sh
+  archlinux-java set jdk-21.0.1
 
-# Install JAVA
-print_installation_message JAVA
-pacman -S --noconfirm jdk-openjdk
-archlinux-java status
-wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
-tar xf jdk-21_linux-x64_bin.tar.gz -C /usr/lib/jvm
-touch /etc/profile.d/jdk21.sh
-echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk21.sh
-echo 'JAVA_HOME=/usr/lib/jvm/jdk-20.0.2' >> /etc/profile.d/jdk21.sh
-chmod +x /etc/profile.d/jdk21.sh
-source /etc/profile.d/jdk21.sh
-archlinux-java set jdk-21.0.1
+  wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+  tar xf jdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm
+  print_installation_message_success JAVA
 
-wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-tar xf jdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm
-print_installation_message_success JAVA
+  # Install Sprint CLI
+  print_installation_message SprintCLI
+  wget https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-cli/${SPRING_VERSION}/spring-boot-cli-${SPRING_VERSION}-bin.tar.gz
+  tar xf spring-boot-cli-${SPRING_VERSION}-bin.tar.gz -C /opt
+  echo -e "\n# Spring Boot CLI" >> /etc/profile.d/spring.sh
+  echo -ne 'export SPRING_HOME=/opt/spring-' >> /etc/profile.d/spring.sh
+  echo "${SPRING_VERSION}" >> /etc/profile.d/spring.sh
+  echo 'export PATH=$PATH:$HOME/bin:$SPRING_HOME/bin' >> /etc/profile.d/spring.sh
+  chmod +x /etc/profile.d/spring.sh
+  source /etc/profile.d/spring.sh
+  print_installation_message_success SprintCLI
+}
 
-# Install Sprint CLI
-print_installation_message SprintCLI
-wget https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-cli/${SPRING_VERSION}/spring-boot-cli-${SPRING_VERSION}-bin.tar.gz
-tar xf spring-boot-cli-${SPRING_VERSION}-bin.tar.gz -C /opt
-echo -e "\n# Spring Boot CLI" >> /etc/profile.d/spring.sh
-echo -ne 'export SPRING_HOME=/opt/spring-' >> /etc/profile.d/spring.sh
-echo "${SPRING_VERSION}" >> /etc/profile.d/spring.sh
-echo 'export PATH=$PATH:$HOME/bin:$SPRING_HOME/bin' >> /etc/profile.d/spring.sh
-chmod +x /etc/profile.d/spring.sh
-source /etc/profile.d/spring.sh
-print_installation_message_success SprintCLI
+# Maven
+install_maven() {
+  print_installation_message Maven
+  wget https://dlcdn.apache.org/maven/maven-${MAVEN}/${MAVEN_VERSION}/binaries/apache-maven-3.9.4-bin.tar.gz
+  tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /opt
+  ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/maven
+  touch /etc/profile.d/maven.sh
+  echo -e '\n# Maven Configuration' >> /etc/profile.d/maven.sh
+  echo "export M2_HOME=/opt/maven" >> /etc/profile.d/maven.sh
+  echo 'export PATH=${M2_HOME}/bin:${PATH}' >> /etc/profile.d/maven.sh
+  echo 'export JAVA_HOME=/usr/lib/jvm/jdk-20.0.2/' >> /etc/profile.d/maven.sh
+  chmod +x /etc/profile.d/maven.sh
+  source /etc/profile.d/maven.sh
+  print_installation_message_success Maven
+}
 
-# Install Maven
-print_installation_message Maven
-wget https://dlcdn.apache.org/maven/maven-${MAVEN}/${MAVEN_VERSION}/binaries/apache-maven-3.9.4-bin.tar.gz
-tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /opt
-ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/maven
-touch /etc/profile.d/maven.sh
-echo -e '\n# Maven Configuration' >> /etc/profile.d/maven.sh
-echo "export M2_HOME=/opt/maven" >> /etc/profile.d/maven.sh
-echo 'export PATH=${M2_HOME}/bin:${PATH}' >> /etc/profile.d/maven.sh
-echo 'export JAVA_HOME=/usr/lib/jvm/jdk-20.0.2/' >> /etc/profile.d/maven.sh
-chmod +x /etc/profile.d/maven.sh
-source /etc/profile.d/maven.sh
-print_installation_message_success Maven
+# Gradle
+  install_gradle() {
+  print_installation_message Gradle
+  rm -rf gradle-${GRADLE_VERSION}-bin.zip
+  wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
+  unzip -d /opt/ gradle-${GRADLE_VERSION}-bin.zip
+  ln -s /opt/gradle-${GRADLE_VERSION} /opt/gradle
+  echo -e '\n# Gradle Configuration' >> /etc/profile.d/gradle.sh
+  echo -ne 'export PATH=$PATH:/opt/gradle/bin' >> /etc/profile.d/gradle.sh
+  chmod +x /etc/profile.d/gradle.sh
+  source /etc/profile.d/gradle.sh
+  print_installation_message_success Gradle
+}
 
-# Install Gradle
-print_installation_message Gradle
-rm -rf gradle-${GRADLE_VERSION}-bin.zip
-wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
-unzip -d /opt/ gradle-${GRADLE_VERSION}-bin.zip
-ln -s /opt/gradle-${GRADLE_VERSION} /opt/gradle
-echo -e '\n# Gradle Configuration' >> /etc/profile.d/gradle.sh
-echo -ne 'export PATH=$PATH:/opt/gradle/bin' >> /etc/profile.d/gradle.sh
-chmod +x /etc/profile.d/gradle.sh
-source /etc/profile.d/gradle.sh
-print_installation_message_success Gradle
+# Intellij-IDEA
+install_intellij_idea() {
+  print_installation_message IntelliJIDEA
+  wget https://download.jetbrains.com/idea/ideaIU-${JETBRAINS_VERSION}.tar.gz -O ideaIU.tar.gz
+  tar -xf ideaIU.tar.gz -C /opt
+  mv /opt/idea-IU-* /opt/idea-IU-${JETBRAINS_VERSION}
+  ln -s /opt/idea-IU-${JETBRAINS_VERSION} /opt/idea
+  ln -s /opt/idea/bin/idea.sh /usr/local/bin/idea
+  echo "[Desktop Entry]
+        Version=1.0
+        Type=Application
+        Name=IntelliJ IDEA Ultimate Edition
+        Icon=/opt/idea/bin/idea.svg
+        Exec=/opt/idea/bin/idea.sh %f
+        Comment=Capable and Ergonomic IDE for JVM
+        Categories=Development;IDE;
+        Terminal=false
+        StartupWMClass=jetbrains-idea
+        StartupNotify=true;" >>/usr/share/applications/jetbrains-idea.desktop
+  print_installation_message_success IntelliJIDEA
+}
 
-# Install IntelliJ IDEA
-print_installation_message IntelliJIDEA
-wget https://download.jetbrains.com/idea/ideaIU-${JETBRAINS_VERSION}.tar.gz -O ideaIU.tar.gz
-tar -xf ideaIU.tar.gz -C /opt
-mv /opt/idea-IU-* /opt/idea-IU-${JETBRAINS_VERSION}
-ln -s /opt/idea-IU-${JETBRAINS_VERSION} /opt/idea
-ln -s /opt/idea/bin/idea.sh /usr/local/bin/idea
-echo "[Desktop Entry]
-      Version=1.0
-      Type=Application
-      Name=IntelliJ IDEA Ultimate Edition
-      Icon=/opt/idea/bin/idea.svg
-      Exec=/opt/idea/bin/idea.sh %f
-      Comment=Capable and Ergonomic IDE for JVM
-      Categories=Development;IDE;
-      Terminal=false
-      StartupWMClass=jetbrains-idea
-      StartupNotify=true;" >>/usr/share/applications/jetbrains-idea.desktop
-print_installation_message_success IntelliJIDEA
+# DataGrip
+install_datagrip() {
+  print_installation_message DataGrip
+  wget https://download.jetbrains.com/datagrip/datagrip-${JETBRAINS_VERSION}.tar.gz
+  tar -xzf datagrip-${JETBRAINS_VERSION}.tar.gz -C /opt
+  mv /opt/DataGrip-* /opt/DataGrip-${JETBRAINS_VERSION}
+  ln -s /opt/DataGrip-${JETBRAINS_VERSION} /opt/datagrip
+  ln -s /opt/datagrip/bin/datagrip.sh /usr/local/bin/datagrip
+  echo "[Desktop Entry]
+        Version=1.0
+        Type=Application
+        Name=DataGrip
+        Icon=/opt/datagrip/bin/datagrip.png
+        Exec=/opt/datagrip/bin/datagrip.sh
+        Terminal=false
+        Categories=Development;IDE;" >>/usr/share/applications/jetbrains-datagrip.desktop
+  print_installation_message_success DataGrip
+}
 
-# Install DataGrip
-print_installation_message DataGrip
-wget https://download.jetbrains.com/datagrip/datagrip-${JETBRAINS_VERSION}.tar.gz
-tar -xzf datagrip-${JETBRAINS_VERSION}.tar.gz -C /opt
-mv /opt/DataGrip-* /opt/DataGrip-${JETBRAINS_VERSION}
-ln -s /opt/DataGrip-${JETBRAINS_VERSION} /opt/datagrip
-ln -s /opt/datagrip/bin/datagrip.sh /usr/local/bin/datagrip
-echo "[Desktop Entry]
-      Version=1.0
-      Type=Application
-      Name=DataGrip
-      Icon=/opt/datagrip/bin/datagrip.png
-      Exec=/opt/datagrip/bin/datagrip.sh
-      Terminal=false
-      Categories=Development;IDE;" >>/usr/share/applications/jetbrains-datagrip.desktop
-print_installation_message_success DataGrip
-
-# Install Postman
-print_installation_message Postman
-curl https://dl.pstmn.io/download/latest/linux64 --output postman-${POSTMAN_VERSION}-linux-x64.tar.gz
-tar -xzf postman-${POSTMAN_VERSION}-linux-x64.tar.gz -C /opt
-echo "[Desktop Entry]
-      Encoding=UTF-8
-      Name=Postman
-      Exec=/opt/Postman/app/Postman %U
-      Icon=/opt/Postman/app/resources/app/assets/icon.png
-      Terminal=false
-      Type=Application
-      Categories=Development;" >>/usr/share/applications/Postman.desktop
-print_installation_message_success Postman
+# Postman
+install_postman() {
+  print_installation_message Postman
+  curl https://dl.pstmn.io/download/latest/linux64 --output postman-${POSTMAN_VERSION}-linux-x64.tar.gz
+  tar -xzf postman-${POSTMAN_VERSION}-linux-x64.tar.gz -C /opt
+  echo "[Desktop Entry]
+        Encoding=UTF-8
+        Name=Postman
+        Exec=/opt/Postman/app/Postman %U
+        Icon=/opt/Postman/app/resources/app/assets/icon.png
+        Terminal=false
+        Type=Application
+        Categories=Development;" >>/usr/share/applications/Postman.desktop
+  print_installation_message_success Postman
+}
 
 # Install GoLang
-print_installation_message GoLang
-wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
-rm -rf /usr/local/go && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz
-touch /etc/profile.d/go.sh
-echo -e '\n# GoLang configuration ' >> /etc/profile.d/go.sh
-echo 'export PATH="$PATH:/usr/local/go/bin"' >> /etc/profile.d/go.sh
-echo 'export GOPATH="$HOME/go"' >> /etc/profile.d/go.sh
-chmod +x /etc/profile.d/go.sh
-source /etc/profile.d/go.sh
-print_installation_message_success GoLang
+install_go() {
+  print_installation_message GoLang
+  wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
+  rm -rf /usr/local/go && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz
+  touch /etc/profile.d/go.sh
+  echo -e '\n# GoLang configuration ' >> /etc/profile.d/go.sh
+  echo 'export PATH="$PATH:/usr/local/go/bin"' >> /etc/profile.d/go.sh
+  echo 'export GOPATH="$HOME/go"' >> /etc/profile.d/go.sh
+  chmod +x /etc/profile.d/go.sh
+  source /etc/profile.d/go.sh
+  print_installation_message_success GoLang
+}
 
-# Install Docker
-print_installation_message Docker
-pacman -S --noconfirm docker
-docker version
-systemctl start docker.service
-systemctl status docker.service
-systemctl enable docker.service
-usermod -aG docker $USER
-pacman -S --noconfirm docker-compose
-print_installation_message_success Docker
+# Docker
+install_docker() {
+  print_installation_message Docker
+  pacman -S --noconfirm docker
+  docker version
+  systemctl start docker.service
+  systemctl status docker.service
+  systemctl enable docker.service
+  usermod -aG docker $USER
+  pacman -S --noconfirm docker-compose
+  print_installation_message_success Docker
+}
 
-# Install Droidcam
-print_installation_message Droidcam
-wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.1.1.zip
-unzip droidcam_latest.zip -d droidcam
-cd droidcam && ./install-client
-cd ..
-pacman -S --noconfirm android-tools v4l2loopback-dkms ffmpeg android-udev --needed
-pacman -S --noconfirm linux-headers
-print_installation_message_success Droidcam
+# Droidcam
+install_droidcam() {
+  print_installation_message Droidcam
+  wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.1.1.zip
+  unzip droidcam_latest.zip -d droidcam
+  cd droidcam && ./install-client
+  cd ..
+  pacman -S --noconfirm android-tools v4l2loopback-dkms ffmpeg android-udev --needed
+  pacman -S --noconfirm linux-headers
+  print_installation_message_success Droidcam
+}
 
-# Install Nvidia Driver
-# pacman -S nvidia \
-# nvidia-settings
 
+# Run
+install_bluetooth
+install_flatpak
+install_gnome_tool
+install_firefox
+install_chromium
+install_spotify
+install_opera
+install_zoom
+install_discord
+install_thunderbird
+install_git
+install_vim
+install_gnome_boxes
+install_terminator
+install_gimp
+install_keepassxc
+install_virtualbox
+install_libreoffice
+install_openvpn
+install_libappindicator
+install_soundrecorder
+install_timeshift
+install_gparted
+install_kdenlive
+install_krita
+install_inkscape
+install_anki
+install_javaJDK
+install_maven
+install_gradle
+install_intellij_idea
+install_datagrip
+install_postman
+install_go
+install_docker
+install_droidcam
 
 printf "\n${GREEN}"
 cat <<EOL
