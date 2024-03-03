@@ -143,6 +143,12 @@ make run
 make install-fonts
 ```
 
+**For Drivers**
+
+```sh
+make install-drivers
+```
+
 ---
 
 
