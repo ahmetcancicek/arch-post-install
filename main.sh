@@ -83,6 +83,15 @@ print_installation_message_success() {
   go_temp
 }
 
+# Install AUR
+sudo -u $USER bash -c '\
+cd $HOME
+rm -rf yay
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si --noconfirm
+cd /tmp
+'
 
 # Install Bluetooth Driver
 install_bluetooth(){
@@ -292,11 +301,17 @@ install_anki(){
   print_installation_message_success Anki
 }
 
-# ORACLE JAVA JDK 18 &  ORACLE JAVA JDK 21 & ORACLE JAVA JDK 17 && SPRING BOOT CLI
-install_javaJDK() {
+# OpenJDK
+install_openJDK(){
   print_installation_message JAVA
   pacman -S --noconfirm jdk-openjdk
   archlinux-java status
+  print_installation_message_success JAVA
+}
+
+# ORACLE JAVA JDK 18 &  ORACLE JAVA JDK 21 & ORACLE JAVA JDK 17 && SPRING BOOT CLI
+install_javaJDK() {
+  print_installation_message JAVA
   wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
   tar xf jdk-21_linux-x64_bin.tar.gz -C /usr/lib/jvm
   touch /etc/profile.d/jdk21.sh
@@ -449,44 +464,371 @@ install_droidcam() {
   print_installation_message_success Droidcam
 }
 
+# Snap Repository
+install_snap() {
+  print_installation_message Snap
+  sudo -u $USER bash -c '\
+  yes | yay -S snapd
+  '
+  systemctl enable --now snapd.socket
+  ln -s /var/lib/snapd/snap /snap
+  systemctl start snapd.service
+  print_installation_message_success Snap
+}
+
+# Google Chrome
+install_google_chrome() {
+  print_installation_message Chrome
+  sudo -u $USER bash -c '\
+  yes |  yay -S google-chrome
+  '
+  # yay -S google-chrome --answerdiff=None
+  print_installation_message_success Chrome
+}
+
+# Microsoft Edge
+install_microsoft_edge() {
+  print_installation_message Edge
+  sudo -u $USER bash -c '\
+  yes |  yay -S microsoft-edge-stable
+  '
+  print_installation_message_success Edge
+}
+
+# Brave
+install_brave(){
+  print_installation_message Brave
+  sudo -u $USER bash -c '\
+  yes | yay -S brave-bin
+  '
+  print_installation_message_success Brave
+}
+
+# VSCODE
+install_vscode() {
+print_installation_message VSCODE
+  sudo -u $USER bash -c '\
+  yes | yay -S visual-studio-code-bin
+  '
+print_installation_message_success VSCODE
+}
+
+# Android Tools
+install_android(){
+  print_installation_message AndroidTools
+  sudo -u $USER bash -c '\
+  yes | yay -S android-tools
+  '
+  print_installation_message_success AndroidTools
+}
+
+
+# Web-Apps
+install_web_apps() {
+  print_installation_message WebApps
+  sudo -u $USER bash -c '\
+  yes | yay -S webapp-manager
+  '
+  print_installation_message_success WebApps
+}
+
+# Dropbox
+install_dropbox() {
+  print_installation_message Dropbox
+  sudo -u $USER bash -c '\
+  yes | yay -S dropbox
+  '
+  print_installation_message_success Dropbox
+}
+
+# pCloud
+install_pcloud(){
+  print_installation_message pCloud
+  sudo -u $USER bash -c '\
+  yes | yay -S pcloud-drive
+  '
+  print_installation_message_success pCloud
+}
+
+# Galaxy Buds Client
+install_galaxybudsclient(){
+  print_installation_message galaxybudsclient
+  sudo -u $USER bash -c '\
+  yes | yay -S galaxybudsclient-bin
+  '
+  print_installation_message_success galaxybudsclient
+}
+
+# Raindrop
+install_raindrop(){
+  print_installation_message Raindrop
+  sudo -u $USER bash -c '\
+  snap install raindrop
+  '
+  print_installation_message_success Raindrop
+}
+
+
+
+cmd=(dialog --title "Debian 12 Installer" --separate-output --checklist 'Please choose: ' 27 76 16)
+options=(
+  # A: Software Repositories
+  A1 "Install Snap Repository" off
+  A2 "Install Flatpak Repository" off
+  # B: Internet
+  B1 "Firefox" off
+  B2 "Google Chrome" off
+  B3 "Chromium" off
+  B4 "Spotify" off
+  B5 "Opera" off
+  B6 "Microsoft Edge" off
+  B7 "Brave" off
+  # C: Chat Application
+  C1 "Zoom Meeting Client" off
+  C2 "Discord" off
+  C3 "Thunderbird Mail" off
+  # D: Development
+  D1 "GIT" off
+  D2 "JAVA" off
+  D3 "GO" off
+  D4 "Microsoft Visual Studio Code" off
+  D5 "IntelliJ IDEA Ultimate" off
+  D6 "GoLand" off
+  D7 "Postman" off
+  D8 "Docker" off
+  D9 "Maven" off
+  D10 "Gradle" off
+  D11 "Node.js & NPM" off
+  D12 "Putty" off
+  D13 "Vim" off
+  D14 "DataGrip" off
+  D15 "Android Tools" off
+  # E: Environment
+  E1 "Gnome Tweak Tool & Extensions" off
+  # F: Utility
+  F1 "Dropbox" off
+  F2 "KeePassXC" off
+  F3 "Virtualbox" off
+  F4 "Gnome Boxes" off
+  F5 "Terminator" off
+  F6 "Web Apps" off
+  F7 "OpenVPN" off
+  F8 "Timeshift" off
+  F9 "Gparted" off
+  F10 "pCloud" off
+  # G: Image, Video and Audio
+  G1 "GIMP" off
+  G2 "Droidcam" off
+  G3 "Kdenlive" off
+  G4 "Krita" off
+  G5 "Inkscape" off
+  G6 "Gnome Sound Recorder" off
+  # H: Productivity
+  H1 "LibreOffice" off
+  H2 "Raindrop" off
+  H3 "Anki" off
+)
+
+
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+for choice in $choices; do
+  case $choice in
+  A1)
+    install_snap
+    ;;
+  A2)
+    install_flatpak
+    ;;
+
+  B1)
+    install_firefox
+    ;;
+  B2)
+    install_google_chrome
+    ;;
+  B3)
+    install_chromium
+    ;;
+  B4)
+    install_spotify
+    ;;
+  B5)
+    install_opera
+    ;;
+  B6)
+    install_microsoft_edge
+    ;;
+  B7)
+    install_brave
+    ;;
+
+  C1)
+    install_zoom
+    ;;
+  C2)
+    install_discord
+    ;;
+  C3)
+    install_thunderbird
+    ;;
+
+  D1)
+    install_git
+    ;;
+  D2)
+    install_openJDK
+    install_javaJDK
+    ;;
+  D3)
+    install_go
+    ;;
+  D4)
+    install_vscode
+    ;;
+  D5)
+    install_intellij_idea
+    ;;
+  D6)
+    install_goland
+    ;;
+  D7)
+    install_postman
+    ;;
+  D8)
+    install_docker
+    ;;
+  D9)
+    install_maven
+    ;;
+  D10)
+    install_gradle
+    ;;
+  D11)
+    install_npm
+    ;;
+  D12)
+    install_putty
+    ;;
+  D13)
+    install_vim
+    ;;
+  D14)
+    install_datagrip
+    ;;
+  D15)
+    install_android
+    ;;
+
+  E1)
+    install_gnome_tool
+    ;;
+
+  F1)
+    install_dropbox
+    ;;
+  F2)
+    install_keepassxc
+    ;;
+  F3)
+    install_virtualbox
+    ;;
+  F4)
+    install_gnome_boxes
+    ;;
+  F5)
+    install_terminator
+    ;;
+  F6)
+    install_web_apps
+    ;;
+  F7)
+    install_openvpn
+    ;;
+  F8)
+    install_timeshift
+    ;;
+  F9)
+    install_gparted
+    ;;
+  F10)
+    install_pcloud
+    ;;
+
+  G1)
+    install_gimp
+    ;;
+  G2)
+    install_droidcam
+    ;;
+  G3)
+    install_kdenlive
+    ;;
+  G4)
+    install_krita
+    ;;
+  G5)
+    install_inkscape
+    ;;
+  G6)
+    install_soundrecorder
+    ;;
+
+  H1)
+    install_libreoffice
+    ;;
+  H2)
+    install_raindrop
+    ;;
+  H3)
+    install_anki
+    ;;
+  *)
+  esac
+done
+
+
+
+
+
 
 # Run
-install_bluetooth
-install_flatpak
-install_gnome_tool
-install_firefox
-install_chromium
-install_spotify
-install_opera
-install_zoom
-install_discord
-install_thunderbird
-install_git
-install_vim
-install_gnome_boxes
-install_terminator
-install_gimp
-install_keepassxc
-install_virtualbox
-install_libreoffice
-install_openvpn
-install_libappindicator
-install_soundrecorder
-install_timeshift
-install_gparted
-install_kdenlive
-install_krita
-install_inkscape
-install_anki
-install_javaJDK
-install_maven
-install_gradle
-install_intellij_idea
-install_datagrip
-install_postman
-install_go
-install_docker
-install_droidcam
+#install_bluetooth
+#install_flatpak
+#install_gnome_tool
+#install_firefox
+#install_chromium
+#install_spotify
+#install_opera
+#install_zoom
+#install_discord
+#install_thunderbird
+#install_git
+#install_vim
+#install_gnome_boxes
+#install_terminator
+#install_gimp
+#install_keepassxc
+#install_virtualbox
+#install_libreoffice
+#install_openvpn
+#install_libappindicator
+#install_soundrecorder
+#install_timeshift
+#install_gparted
+#install_kdenlive
+#install_krita
+#install_inkscape
+#install_anki
+#install_javaJDK
+#install_maven
+#install_gradle
+#install_intellij_idea
+#install_datagrip
+#install_postman
+#install_go
+#install_docker
+#install_droidcam
 
 printf "\n${GREEN}"
 cat <<EOL
