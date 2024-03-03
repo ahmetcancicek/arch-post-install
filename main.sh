@@ -568,6 +568,11 @@ install_raindrop(){
   print_installation_message_success Raindrop
 }
 
+install_npm(){
+  print_installation_message NPM
+  pacman -Syu nodejs npm
+  print_installation_message_success NPM
+}
 
 
 cmd=(dialog --title "Debian 12 Installer" --separate-output --checklist 'Please choose: ' 27 76 16)
@@ -599,10 +604,9 @@ options=(
   D9 "Maven" off
   D10 "Gradle" off
   D11 "Node.js & NPM" off
-  D12 "Putty" off
-  D13 "Vim" off
-  D14 "DataGrip" off
-  D15 "Android Tools" off
+  D12 "Vim" off
+  D13 "DataGrip" off
+  D14 "Android Tools" off
   # E: Environment
   E1 "Gnome Tweak Tool & Extensions" off
   # F: Utility
@@ -708,20 +712,18 @@ for choice in $choices; do
     install_npm
     ;;
   D12)
-    install_putty
-    ;;
-  D13)
     install_vim
     ;;
-  D14)
+  D13)
     install_datagrip
     ;;
-  D15)
+  D14)
     install_android
     ;;
 
   E1)
     install_gnome_tool
+    install_libappindicator
     ;;
 
   F1)
@@ -787,48 +789,6 @@ for choice in $choices; do
   esac
 done
 
-
-
-
-
-
-# Run
-#install_bluetooth
-#install_flatpak
-#install_gnome_tool
-#install_firefox
-#install_chromium
-#install_spotify
-#install_opera
-#install_zoom
-#install_discord
-#install_thunderbird
-#install_git
-#install_vim
-#install_gnome_boxes
-#install_terminator
-#install_gimp
-#install_keepassxc
-#install_virtualbox
-#install_libreoffice
-#install_openvpn
-#install_libappindicator
-#install_soundrecorder
-#install_timeshift
-#install_gparted
-#install_kdenlive
-#install_krita
-#install_inkscape
-#install_anki
-#install_javaJDK
-#install_maven
-#install_gradle
-#install_intellij_idea
-#install_datagrip
-#install_postman
-#install_go
-#install_docker
-#install_droidcam
 
 printf "\n${GREEN}"
 cat <<EOL
