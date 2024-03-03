@@ -228,7 +228,7 @@ install_virtualbox() {
 
 # LibreOffice
 install_libreoffice(){
-    print_installation_message LibreOffice
+  print_installation_message LibreOffice
   pacman -S --noconfirm libreoffice
   print_installation_message_success LibreOffice
 }
@@ -341,7 +341,7 @@ install_javaJDK() {
 # Maven
 install_maven() {
   print_installation_message Maven
-  wget https://dlcdn.apache.org/maven/maven-${MAVEN}/${MAVEN_VERSION}/binaries/apache-maven-3.9.4-bin.tar.gz
+  wget https://dlcdn.apache.org/maven/maven-${MAVEN}/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
   tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /opt
   ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/maven
   touch /etc/profile.d/maven.sh
@@ -468,8 +468,7 @@ install_droidcam() {
 install_snap() {
   print_installation_message Snap
   sudo -u $USER bash -c '\
-  yes | yay -S snapd
-  '
+  yes | yay -S snapd  '
   systemctl enable --now snapd.socket
   ln -s /var/lib/snapd/snap /snap
   systemctl start snapd.service
@@ -480,8 +479,7 @@ install_snap() {
 install_google_chrome() {
   print_installation_message Chrome
   sudo -u $USER bash -c '\
-  yes |  yay -S google-chrome
-  '
+  yes |  yay -S google-chrome  '
   # yay -S google-chrome --answerdiff=None
   print_installation_message_success Chrome
 }
@@ -490,8 +488,7 @@ install_google_chrome() {
 install_microsoft_edge() {
   print_installation_message Edge
   sudo -u $USER bash -c '\
-  yes |  yay -S microsoft-edge-stable
-  '
+  yes |  yay -S microsoft-edge-stable  '
   print_installation_message_success Edge
 }
 
@@ -499,8 +496,7 @@ install_microsoft_edge() {
 install_brave(){
   print_installation_message Brave
   sudo -u $USER bash -c '\
-  yes | yay -S brave-bin
-  '
+  yes | yay -S brave-bin  '
   print_installation_message_success Brave
 }
 
@@ -508,8 +504,7 @@ install_brave(){
 install_vscode() {
 print_installation_message VSCODE
   sudo -u $USER bash -c '\
-  yes | yay -S visual-studio-code-bin
-  '
+  yes | yay -S visual-studio-code-bin  '
 print_installation_message_success VSCODE
 }
 
@@ -517,8 +512,7 @@ print_installation_message_success VSCODE
 install_android(){
   print_installation_message AndroidTools
   sudo -u $USER bash -c '\
-  yes | yay -S android-tools
-  '
+  yes | yay -S android-tools  '
   print_installation_message_success AndroidTools
 }
 
@@ -527,8 +521,7 @@ install_android(){
 install_web_apps() {
   print_installation_message WebApps
   sudo -u $USER bash -c '\
-  yes | yay -S webapp-manager
-  '
+  yes | yay -S webapp-manager  '
   print_installation_message_success WebApps
 }
 
@@ -536,8 +529,7 @@ install_web_apps() {
 install_dropbox() {
   print_installation_message Dropbox
   sudo -u $USER bash -c '\
-  yes | yay -S dropbox
-  '
+  yes | yay -S dropbox  '
   print_installation_message_success Dropbox
 }
 
@@ -545,8 +537,7 @@ install_dropbox() {
 install_pcloud(){
   print_installation_message pCloud
   sudo -u $USER bash -c '\
-  yes | yay -S pcloud-drive
-  '
+  yes | yay -S pcloud-drive  '
   print_installation_message_success pCloud
 }
 
@@ -554,8 +545,7 @@ install_pcloud(){
 install_galaxybudsclient(){
   print_installation_message galaxybudsclient
   sudo -u $USER bash -c '\
-  yes | yay -S galaxybudsclient-bin
-  '
+  yes | yay -S galaxybudsclient-bin  '
   print_installation_message_success galaxybudsclient
 }
 
@@ -563,8 +553,7 @@ install_galaxybudsclient(){
 install_raindrop(){
   print_installation_message Raindrop
   sudo -u $USER bash -c '\
-  snap install raindrop
-  '
+  snap install raindrop  '
   print_installation_message_success Raindrop
 }
 
