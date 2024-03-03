@@ -390,6 +390,13 @@ install_intellij_idea() {
   print_installation_message_success IntelliJIDEA
 }
 
+# GoLand
+install_goland(){
+  print_installation_message GoLand
+
+  print_installation_message_success GoLand
+}
+
 # DataGrip
 install_datagrip() {
   print_installation_message DataGrip
@@ -559,7 +566,7 @@ install_raindrop(){
 
 install_npm(){
   print_installation_message NPM
-  pacman -Syu nodejs npm
+  pacman -Syu --noconfirm nodejs npm
   print_installation_message_success NPM
 }
 
