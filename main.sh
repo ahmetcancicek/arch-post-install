@@ -22,10 +22,10 @@ fi
 # Set Version
 JETBRAINS_VERSION=2023.3.6
 GO_VERSION=1.22.0
-POSTMAN_VERSION=10.23
+POSTMAN_VERSION=10.24
 MAVEN=3
 MAVEN_VERSION=3.9.6
-GRADLE_VERSION=8.2.1
+GRADLE_VERSION=8.6
 SPRING_VERSION=3.2.2
 ANKI_VERSION=23.12.1
 DROIDCAM_VERSION=2.1.3
@@ -316,10 +316,10 @@ install_javaJDK() {
   tar xf jdk-21_linux-x64_bin.tar.gz -C /usr/lib/jvm
   touch /etc/profile.d/jdk21.sh
   echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk21.sh
-  echo 'JAVA_HOME=/usr/lib/jvm/jdk-20.0.2' >> /etc/profile.d/jdk21.sh
+  echo 'JAVA_HOME=/usr/lib/jvm/jdk-21.0.2' >> /etc/profile.d/jdk21.sh
   chmod +x /etc/profile.d/jdk21.sh
   source /etc/profile.d/jdk21.sh
-  archlinux-java set jdk-21.0.1
+  archlinux-java set jdk-21.0.2
 
   wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
   tar xf jdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm
@@ -348,7 +348,7 @@ install_maven() {
   echo -e '\n# Maven Configuration' >> /etc/profile.d/maven.sh
   echo "export M2_HOME=/opt/maven" >> /etc/profile.d/maven.sh
   echo 'export PATH=${M2_HOME}/bin:${PATH}' >> /etc/profile.d/maven.sh
-  echo 'export JAVA_HOME=/usr/lib/jvm/jdk-20.0.2/' >> /etc/profile.d/maven.sh
+  echo 'export JAVA_HOME=/usr/lib/jvm/jdk-21.0.2/' >> /etc/profile.d/maven.sh
   chmod +x /etc/profile.d/maven.sh
   source /etc/profile.d/maven.sh
   print_installation_message_success Maven
@@ -566,8 +566,14 @@ install_raindrop(){
 
 install_npm(){
   print_installation_message NPM
-  pacman -Syu --noconfirm nodejs npm
+  pacman -S--noconfirm nodejs npm
   print_installation_message_success NPM
+}
+
+install_vlc(){
+  print_installation_message VLC
+  pacman -S --noconfirm vlc
+  print_installation_message_success VLC
 }
 
 
@@ -623,6 +629,7 @@ options=(
   G4 "Krita" off
   G5 "Inkscape" off
   G6 "Gnome Sound Recorder" off
+  G7 "VLC" off
   # H: Productivity
   H1 "LibreOffice" off
   H2 "Raindrop" off
@@ -770,6 +777,9 @@ for choice in $choices; do
     ;;
   G6)
     install_soundrecorder
+    ;;
+  G7)
+    install_vlc
     ;;
 
   H1)
