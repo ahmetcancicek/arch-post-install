@@ -323,6 +323,9 @@ install_javaJDK() {
 
   wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
   tar xf jdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm
+
+  rm -rf /tmp/jdk-21_linux-x64_bin.tar.gz
+  rm -rf /tmp/jdk-17_linux-x64_bin.tar.gz
   print_installation_message_success JAVA
 
   # Install Sprint CLI
@@ -335,6 +338,8 @@ install_javaJDK() {
   echo 'export PATH=$PATH:$HOME/bin:$SPRING_HOME/bin' >> /etc/profile.d/spring.sh
   chmod +x /etc/profile.d/spring.sh
   source /etc/profile.d/spring.sh
+
+  rm -rf /tmp/spring-boot-cli-${SPRING_VERSION}-bin.tar.gz
   print_installation_message_success SprintCLI
 }
 
@@ -351,6 +356,7 @@ install_maven() {
   echo 'export JAVA_HOME=/usr/lib/jvm/jdk-21.0.2/' >> /etc/profile.d/maven.sh
   chmod +x /etc/profile.d/maven.sh
   source /etc/profile.d/maven.sh
+  rm -rf /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz
   print_installation_message_success Maven
 }
 
@@ -365,6 +371,7 @@ install_maven() {
   echo -ne 'export PATH=$PATH:/opt/gradle/bin' >> /etc/profile.d/gradle.sh
   chmod +x /etc/profile.d/gradle.sh
   source /etc/profile.d/gradle.sh
+  rm -rf /tmp/gradle-${GRADLE_VERSION}-bin.zip
   print_installation_message_success Gradle
 }
 
@@ -387,6 +394,7 @@ install_intellij_idea() {
         Terminal=false
         StartupWMClass=jetbrains-idea
         StartupNotify=true;" >>/usr/share/applications/jetbrains-idea.desktop
+  rm -rf /tmp/ideaIU.tar.gz
   print_installation_message_success IntelliJIDEA
 }
 
@@ -406,6 +414,7 @@ install_datagrip() {
         Exec=/opt/datagrip/bin/datagrip.sh
         Terminal=false
         Categories=Development;IDE;" >>/usr/share/applications/jetbrains-datagrip.desktop
+  rm -rf /tmp/datagrip-${JETBRAINS_VERSION}.tar.gz
   print_installation_message_success DataGrip
 }
 
@@ -425,6 +434,7 @@ install_goland() {
           Exec=/opt/GoLand-${JETBRAINS_VERSION}/bin/goland.sh
           Terminal=false
           Categories=Development;IDE;" >>/usr/share/applications/jetbrains-goland.desktop
+  rm -rf /tmp/goland.tar.gz
   print_installation_message_success GoLand
 }
 
@@ -441,6 +451,7 @@ install_postman() {
         Terminal=false
         Type=Application
         Categories=Development;" >>/usr/share/applications/Postman.desktop
+  rm -rf /tmp/postman-${POSTMAN_VERSION}-linux-x64.tar.gz
   print_installation_message_success Postman
 }
 
@@ -455,6 +466,7 @@ install_go() {
   echo 'export GOPATH="$HOME/go"' >> /etc/profile.d/go.sh
   chmod +x /etc/profile.d/go.sh
   source /etc/profile.d/go.sh
+  rm -rf /tmp/go${GO_VERSION}.linux-amd64.tar.gz
   print_installation_message_success GoLang
 }
 
