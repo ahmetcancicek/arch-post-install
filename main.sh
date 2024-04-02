@@ -474,12 +474,7 @@ install_docker() {
 # Droidcam
 install_droidcam() {
   print_installation_message Droidcam
-  wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.1.1.zip
-  unzip droidcam_latest.zip -d droidcam
-  cd droidcam && ./install-client
-  cd ..
-  pacman -S --noconfirm android-tools v4l2loopback-dkms ffmpeg android-udev --needed
-  pacman -S --noconfirm linux-headers
+
   print_installation_message_success Droidcam
 }
 
