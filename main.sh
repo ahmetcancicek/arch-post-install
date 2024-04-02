@@ -390,13 +390,6 @@ install_intellij_idea() {
   print_installation_message_success IntelliJIDEA
 }
 
-# GoLand
-install_goland(){
-  print_installation_message GoLand
-
-  print_installation_message_success GoLand
-}
-
 # DataGrip
 install_datagrip() {
   print_installation_message DataGrip
@@ -414,6 +407,25 @@ install_datagrip() {
         Terminal=false
         Categories=Development;IDE;" >>/usr/share/applications/jetbrains-datagrip.desktop
   print_installation_message_success DataGrip
+}
+
+# GoLand
+install_goland() {
+  print_installation_message GoLand
+  wget https://download.jetbrains.com/go/goland-${JETBRAINS_VERSION}.tar.gz -O goland.tar.gz
+  tar -xzf goland.tar.gz -C /opt
+  mv /opt/GoLand-* /opt/GoLand-${JETBRAINS_VERSION}
+  ln -s /opt/GoLand-${JETBRAINS_VERSION} /opt/goland
+  ln -s /opt/goland/bin/goland.sh /usr/local/bin/goland
+  echo "[Desktop Entry]
+          Version=1.0
+          Type=Application
+          Name=GoLand
+          Icon=/opt/GoLand-${JETBRAINS_VERSION}/bin/goland.png
+          Exec=/opt/GoLand-${JETBRAINS_VERSION}/bin/goland.sh
+          Terminal=false
+          Categories=Development;IDE;" >>/usr/share/applications/jetbrains-goland.desktop
+  print_installation_message_success GoLand
 }
 
 # Postman
