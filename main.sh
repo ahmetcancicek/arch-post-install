@@ -146,13 +146,6 @@ install_spotify() {
   print_installation_message_success Spotify
 }
 
-# Opera
-install_opera() {
-  print_installation_message Opera
-  pacman -S --noconfirm opera
-  print_installation_message_success Opera
-}
-
 # Zoom
 install_zoom() {
   print_installation_message Zoom
@@ -482,13 +475,6 @@ install_docker() {
   print_installation_message_success Docker
 }
 
-# Droidcam
-install_droidcam() {
-  print_installation_message Droidcam
-
-  print_installation_message_success Droidcam
-}
-
 # Snap Repository
 install_snap() {
   print_installation_message Snap
@@ -594,6 +580,19 @@ install_vlc(){
   print_installation_message_success VLC
 }
 
+# Droidcam
+install_droidcam() {
+  print_installation_message Droidcam
+  wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.1.1.zip
+  unzip droidcam_latest.zip -d droidcam
+  cd droidcam && ./install-client
+  cd ..
+  pacman -S --noconfirm android-tools v4l2loopback-dkms ffmpeg android-udev --needed
+  # TODO: Fix the Kernel Problem
+  # pacman -S --noconfirm linux-headers
+  print_installation_message_success Droidcam
+}
+
 
 cmd=(dialog --title "Debian 12 Installer" --separate-output --checklist 'Please choose: ' 27 76 16)
 options=(
@@ -605,9 +604,8 @@ options=(
   B2 "Google Chrome" off
   B3 "Chromium" off
   B4 "Spotify" off
-  B5 "Opera" off
-  B6 "Microsoft Edge" off
-  B7 "Brave" off
+  B5 "Microsoft Edge" off
+  B6 "Brave" off
   # C: Chat Application
   C1 "Zoom Meeting Client" off
   C2 "Discord" off
@@ -642,12 +640,11 @@ options=(
   F10 "pCloud" off
   # G: Image, Video and Audio
   G1 "GIMP" off
-  G2 "Droidcam" off
-  G3 "Kdenlive" off
-  G4 "Krita" off
-  G5 "Inkscape" off
-  G6 "Gnome Sound Recorder" off
-  G7 "VLC" off
+  G2 "Kdenlive" off
+  G3 "Krita" off
+  G4 "Inkscape" off
+  G5 "Gnome Sound Recorder" off
+  G6 "VLC" off
   # H: Productivity
   H1 "LibreOffice" off
   H2 "Raindrop" off
@@ -679,12 +676,9 @@ for choice in $choices; do
     install_spotify
     ;;
   B5)
-    install_opera
-    ;;
-  B6)
     install_microsoft_edge
     ;;
-  B7)
+  B6)
     install_brave
     ;;
 
@@ -782,21 +776,18 @@ for choice in $choices; do
     install_gimp
     ;;
   G2)
-    install_droidcam
-    ;;
-  G3)
     install_kdenlive
     ;;
-  G4)
+  G3)
     install_krita
     ;;
-  G5)
+  G4)
     install_inkscape
     ;;
-  G6)
+  G5)
     install_soundrecorder
     ;;
-  G7)
+  G6)
     install_vlc
     ;;
 
