@@ -648,8 +648,7 @@ options=(
   G6 "VLC" off
   # H: Productivity
   H1 "LibreOffice" off
-  H2 "Raindrop" off
-  H3 "Anki" off
+  H2 "Anki" off
 )
 
 
@@ -796,9 +795,6 @@ for choice in $choices; do
     install_libreoffice
     ;;
   H2)
-    install_raindrop
-    ;;
-  H3)
     install_anki
     ;;
   *)
