@@ -101,7 +101,7 @@ cd /usr/local/share/fonts/
 fc-cache -f
 print_installation_message_success Clear-Sans
 
-# Fira Sans Fira-Sans
+# Fira Sans
 print_installation_message Fira-Sans
 rm -rf fira-sans.zip
 curl -o fira-sans.zip https://www.fontsquirrel.com/fonts/download/fira-sans

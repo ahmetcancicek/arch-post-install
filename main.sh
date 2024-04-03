@@ -483,6 +483,7 @@ install_snap() {
   systemctl enable --now snapd.socket
   ln -s /var/lib/snapd/snap /snap
   systemctl start snapd.service
+  systemctl enable snapd.service
   print_installation_message_success Snap
 }
 
