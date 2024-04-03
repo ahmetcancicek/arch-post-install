@@ -61,7 +61,7 @@ print_installation_message_success Powerline-Fonts
 
 # Roboto
 print_installation_message Roboto
-curl -o roboto.zip https://fonts.google.com/download?family=Roboto
+curl -o roboto.zip https://www.fontsquirrel.com/fonts/download/roboto
 unzip roboto.zip -d roboto
 rm -rf /usr/local/share/fonts/roboto
 mv roboto /usr/local/share/fonts/
@@ -69,7 +69,7 @@ print_installation_message_success Roboto
 
 # Noto Sans
 print_installation_message Noto-Sans
-curl -o noto-sans.zip https://fonts.google.com/download?family=Noto%20Sans
+curl -o noto-sans.zip https://www.fontsquirrel.com/fonts/download/noto-sans
 unzip noto-sans.zip -d noto-sans
 rm -rf /usr/local/share/fonts/noto-sans
 mv noto-sans /usr/local/share/fonts/
@@ -77,7 +77,7 @@ print_installation_message_success Noto-Sans
 
 # Fira Mono
 print_installation_message Fira-Mono
-curl -o fira-mono.zip https://fonts.google.com/download?family=Fira%20Mono
+curl -o fira-mono.ziphttps://www.fontsquirrel.com/fonts/download/fira-mono
 unzip fira-mono.zip -d fira-mono
 rm -rf /usr/local/share/fonts/fira-mono
 mv fira-mono /usr/local/share/fonts/
@@ -93,7 +93,7 @@ print_installation_message_success Clear-Sans
 
 # Fira Sans Fira-Sans
 print_installation_message Fira-Sans
-curl -o fira-sans.zip https://fonts.google.com/download?family=Fira%20Sans
+curl -o fira-sans.zip https://www.fontsquirrel.com/fonts/download/fira-sans
 unzip fira-sans.zip -d fira-sans
 rm -rf /usr/local/share/fonts/fira_sans
 mv fira-sans /usr/local/share/fonts/
@@ -109,7 +109,7 @@ print_installation_message_success Roboto-Slab
 
 # Overpass
 print_installation_message Overpass
-curl -o overpass.zip https://fonts.google.com/download?family=Overpass
+curl -o overpass.zip https://www.fontsquirrel.com/fonts/download/overpass
 unzip overpass.zip -d overpass
 rm -rf /usr/local/share/fonts/overpass
 mv overpass /usr/local/share/fonts/
@@ -117,7 +117,7 @@ print_installation_message_success Overpass
 
 # Ubuntu
 print_installation_message Ubuntu
-curl -o ubuntu.zip https://fonts.google.com/download?family=Ubuntu
+curl -o ubuntu.zip https://www.fontsquirrel.com/fonts/download/ubuntu
 unzip ubuntu.zip -d ubuntu
 rm -rf /usr/local/share/fonts/ubuntu
 mv ubuntu /usr/local/share/fonts/
@@ -125,23 +125,15 @@ print_installation_message_success Ubuntu
 
 # Ubuntu Mono
 print_installation_message Ubuntu-Mono
-curl -o ubuntu-mono.zip https://fonts.google.com/download?family=Ubuntu%20Mono
+curl -o ubuntu-mono.zip https://www.fontsquirrel.com/fonts/download/ubuntu-mono
 unzip ubuntu-mono.zip -d ubuntu-mono
 rm -rf /usr/local/share/fonts/ubuntu-mono
 mv ubuntu-mono /usr/local/share/fonts/
 print_installation_message_success Ubuntu-Mono
 
-# Ubuntu Condensed
-print_installation_message Ubuntu-Condensed
-curl -o ubuntu-condensed.zip https://fonts.google.com/download?family=Ubuntu%20Condensed
-unzip ubuntu-condensed.zip -d ubuntu-condensed
-rm -rf /usr/local/share/fonts/ubuntu-condensed
-mv ubuntu-condensed /usr/local/share/fonts/
-print_installation_message_success Ubuntu-Condensed
-
 # Overpass Mono
 print_installation_message Overpass-Mono
-curl -o overpass-mono.zip https://fonts.google.com/download?family=Overpass%20Mono
+curl -o overpass-mono.zip https://www.fontsquirrel.com/fonts/download/overpass-mono
 unzip overpass-mono.zip -d overpass-mono
 rm -rf /usr/local/share/fonts/overpass-mono
 mv overpass-mono /usr/local/share/fonts/
