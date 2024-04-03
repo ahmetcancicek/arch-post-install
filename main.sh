@@ -584,7 +584,7 @@ install_raindrop(){
 
 install_npm(){
   print_installation_message NPM
-  pacman -S--noconfirm nodejs npm
+  pacman -S --noconfirm nodejs npm
   print_installation_message_success NPM
 }
 
