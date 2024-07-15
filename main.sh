@@ -20,13 +20,13 @@ EOL
 fi
 
 # Set Version
-JETBRAINS_VERSION=2023.3.4
-GO_VERSION=1.22.0
-POSTMAN_VERSION=10.24
+JETBRAINS_VERSION=2024.1.4
+GO_VERSION=1.22.5
+POSTMAN_VERSION=11.3.2
 MAVEN=3
-MAVEN_VERSION=3.9.6
-GRADLE_VERSION=8.6
-SPRING_VERSION=3.2.2
+MAVEN_VERSION=3.9.8
+GRADLE_VERSION=8.9
+SPRING_VERSION=3.3.1
 ANKI_VERSION=23.12.1
 DROIDCAM_VERSION=2.1.3
 
@@ -334,10 +334,10 @@ install_javaJDK() {
   tar xf jdk-21_linux-x64_bin.tar.gz -C /usr/lib/jvm
   touch /etc/profile.d/jdk21.sh
   echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk21.sh
-  echo 'JAVA_HOME=/usr/lib/jvm/jdk-21.0.2' >> /etc/profile.d/jdk21.sh
+  echo 'JAVA_HOME=/usr/lib/jvm/jdk-21.0.3' >> /etc/profile.d/jdk21.sh
   chmod +x /etc/profile.d/jdk21.sh
   source /etc/profile.d/jdk21.sh
-  archlinux-java set jdk-21.0.2
+  archlinux-java set jdk-21.0.3
 
   wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
   tar xf jdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm
