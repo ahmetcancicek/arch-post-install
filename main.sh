@@ -331,13 +331,15 @@ install_openJDK(){
 install_javaJDK() {
   print_installation_message JAVA
   wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
-  tar xf jdk-21_linux-x64_bin.tar.gz -C /usr/lib/jvm
+  tar xf jdk-21_linux-x64_bin.tar.gz
+  mv jdk-21* jdk-21
+  mv jdk-21 /usr/lib/jvm
   touch /etc/profile.d/jdk21.sh
   echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk21.sh
-  echo 'JAVA_HOME=/usr/lib/jvm/jdk-21.0.3' >> /etc/profile.d/jdk21.sh
+  echo 'JAVA_HOME=/usr/lib/jvm/jdk-21' >> /etc/profile.d/jdk21.sh
   chmod +x /etc/profile.d/jdk21.sh
   source /etc/profile.d/jdk21.sh
-  archlinux-java set jdk-21.0.3
+  archlinux-java set jdk-21
 
   wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
   tar xf jdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm
@@ -371,7 +373,7 @@ install_maven() {
   echo -e '\n# Maven Configuration' >> /etc/profile.d/maven.sh
   echo "export M2_HOME=/opt/maven" >> /etc/profile.d/maven.sh
   echo 'export PATH=${M2_HOME}/bin:${PATH}' >> /etc/profile.d/maven.sh
-  echo 'export JAVA_HOME=/usr/lib/jvm/jdk-21.0.2/' >> /etc/profile.d/maven.sh
+  echo 'export JAVA_HOME=/usr/lib/jvm/jdk-21/' >> /etc/profile.d/maven.sh
   chmod +x /etc/profile.d/maven.sh
   source /etc/profile.d/maven.sh
   rm -rf /tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz
