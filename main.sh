@@ -121,29 +121,8 @@ install_gnome_tool() {
   pacman -S --noconfirm gnome-browser-connector
   pacman -S --noconfirm gnome-themes-extra
 
-  # Dash to Dock
-  whet https://github.com/micheleg/dash-to-dock/releases/download/extensions.gnome.org-v90/dash-to-dock@micxgx.gmail.com.zip
-  gnome-extensions install dash-to-dock@micxgx.gmail.com.zip
-
-  # GSConnect
-  wget https://github.com/GSConnect/gnome-shell-extension-gsconnect/releases/download/v57/gsconnect@andyholmes.github.io.zip
-  gnome-extensions install --force gsconnect@andyholmes.github.io.zip
-
-  # Bluetooth Quick Connect
-  wget https://github.com/Extensions-Valhalla/gnome-bluetooth-quick-connect/releases/download/v48/bluetooth-quick-connect@bjarosze.gmail.com.shell-extension.zip
-  gnome-extensions install bluetooth-quick-connect@bjarosze.gmail.com.shell-extension.zip
-
-  # Media Controls
-  wget https://github.com/sakithb/media-controls/releases/download/v2.0.1/mediacontrols@cliffniff.github.com.shell-extension.zip
-  gnome-extensions install mediacontrols@cliffniff.github.com.shell-extension.zip
-
-  # Vitals
-  wget https://github.com/corecoding/Vitals/releases/download/v66.0.1/vitals.zip
-  gnome-extensions install vitals.zip
-
-  # Tiling Assistant
-  wget https://github.com/Leleat/Tiling-Assistant/releases/download/v46/tiling-assistant@leleat-on-github.shell-extension.zip
-  gnome-extensions install tiling-assistant@leleat-on-github.shell-extension.zip
+  # Monitor scaling
+  gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer','kms-modifiers']"
 
   print_installation_message_success Extensions
 }
@@ -332,7 +311,7 @@ install_javaJDK() {
   print_installation_message JAVA
   wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
   tar xf jdk-21_linux-x64_bin.tar.gz
-  mv jdk-21* jdk-21
+  mv jdk-21.* jdk-21
   mv jdk-21 /usr/lib/jvm
   touch /etc/profile.d/jdk21.sh
   echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk21.sh
