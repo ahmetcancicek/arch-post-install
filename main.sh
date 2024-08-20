@@ -20,7 +20,7 @@ EOL
 fi
 
 # Set Version
-JETBRAINS_VERSION=2024.1.4
+JETBRAINS_VERSION=2024.2.0.1
 GO_VERSION=1.22.5
 POSTMAN_VERSION=11.3.2
 MAVEN=3
@@ -57,6 +57,7 @@ essentials=(
   ntfsprogs
   dosfstools
   dialog
+  unzip
 )
 
 printf "\n${BLUE}========================Installing standard package $1========================${ENDCOLOR}\n"
