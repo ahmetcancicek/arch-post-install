@@ -27,7 +27,7 @@ MAVEN=3
 MAVEN_VERSION=3.9.8
 GRADLE_VERSION=8.9
 SPRING_VERSION=3.3.1
-ANKI_VERSION=23.12.1
+ANKI_VERSION=24.06.3
 DROIDCAM_VERSION=2.1.3
 
 # Get USER name
@@ -291,7 +291,7 @@ install_inkscape(){
 install_anki(){
   print_installation_message Anki
   pacman -S --noconfirm zstd
-  wget https://github.com/ankitects/anki/releases/download/23.12.1/anki-${ANKI_VERSION}-linux-qt6.tar.zst -O anki.tar.zst
+  wget https://github.com/ankitects/anki/releases/download/${ANKI_VERSION}/anki-${ANKI_VERSION}-linux-qt6.tar.zst -O anki.tar.zst
   # pacman -U --noconfirm anki.tar.zst
   tar xaf anki.tar.zst
   cd anki-${ANKI_VERSION}-linux-qt6
