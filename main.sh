@@ -20,7 +20,8 @@ EOL
 fi
 
 # Set Version
-JETBRAINS_VERSION=2024.2.0.1
+IntelliJIDEA_VERSION=2024.2.0.2
+DataGrip_VERSION=2024.2.1
 GO_VERSION=1.22.5
 POSTMAN_VERSION=11.3.2
 MAVEN=3
@@ -295,7 +296,7 @@ install_anki(){
   # pacman -U --noconfirm anki.tar.zst
   tar xaf anki.tar.zst
   cd anki-${ANKI_VERSION}-linux-qt6
-  sudo ./install.sh
+  ./install.sh
   print_installation_message_success Anki
 }
 
@@ -378,10 +379,10 @@ install_maven() {
 # Intellij-IDEA
 install_intellij_idea() {
   print_installation_message IntelliJIDEA
-  wget https://download.jetbrains.com/idea/ideaIU-${JETBRAINS_VERSION}.tar.gz -O ideaIU.tar.gz
+  wget https://download.jetbrains.com/idea/ideaIU-${IntelliJIDEA_VERSION}.tar.gz -O ideaIU.tar.gz
   tar -xf ideaIU.tar.gz -C /opt
-  mv /opt/idea-IU-* /opt/idea-IU-${JETBRAINS_VERSION}
-  ln -s /opt/idea-IU-${JETBRAINS_VERSION} /opt/idea
+  mv /opt/idea-IU-* /opt/idea-IU-${IntelliJIDEA_VERSION}
+  ln -s /opt/idea-IU-${IntelliJIDEA_VERSION} /opt/idea
   ln -s /opt/idea/bin/idea.sh /usr/local/bin/idea
   echo "[Desktop Entry]
         Version=1.0
@@ -401,9 +402,9 @@ install_intellij_idea() {
 # DataGrip
 install_datagrip() {
   print_installation_message DataGrip
-  wget https://download.jetbrains.com/datagrip/datagrip-${JETBRAINS_VERSION}.tar.gz
-  tar -xzf datagrip-${JETBRAINS_VERSION}.tar.gz -C /opt
-  ln -s /opt/DataGrip-${JETBRAINS_VERSION} /opt/datagrip
+  wget https://download.jetbrains.com/datagrip/datagrip-${DataGrip_VERSION}.tar.gz
+  tar -xzf datagrip-${DataGrip_VERSION}.tar.gz -C /opt
+  ln -s /opt/DataGrip-${DataGrip_VERSION} /opt/datagrip
   ln -s /opt/datagrip/bin/datagrip.sh /usr/local/bin/datagrip
   echo "[Desktop Entry]
         Version=1.0
@@ -413,7 +414,7 @@ install_datagrip() {
         Exec=/opt/datagrip/bin/datagrip.sh
         Terminal=false
         Categories=Development;IDE;" >>/usr/share/applications/jetbrains-datagrip.desktop
-  rm -rf /tmp/datagrip-${JETBRAINS_VERSION}.tar.gz
+  rm -rf /tmp/datagrip-${DataGrip_VERSION}.tar.gz
   print_installation_message_success DataGrip
 }
 
