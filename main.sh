@@ -22,6 +22,7 @@ fi
 # Set Version
 IntelliJIDEA_VERSION=2024.2.0.2
 DataGrip_VERSION=2024.2.1
+GoLand_VERSION=2024.2.0.2
 GO_VERSION=1.22.5
 POSTMAN_VERSION=11.3.2
 MAVEN=3
@@ -421,17 +422,17 @@ install_datagrip() {
 # GoLand
 install_goland() {
   print_installation_message GoLand
-  wget https://download.jetbrains.com/go/goland-${JETBRAINS_VERSION}.tar.gz -O goland.tar.gz
+  wget https://download.jetbrains.com/go/goland-${GoLand_VERSION}.tar.gz -O goland.tar.gz
   tar -xzf goland.tar.gz -C /opt
-  mv /opt/GoLand-* /opt/GoLand-${JETBRAINS_VERSION}
-  ln -s /opt/GoLand-${JETBRAINS_VERSION} /opt/goland
+  mv /opt/GoLand-* /opt/GoLand-${GoLand_VERSION}
+  ln -s /opt/GoLand-${GoLand_VERSION} /opt/goland
   ln -s /opt/goland/bin/goland.sh /usr/local/bin/goland
   echo "[Desktop Entry]
           Version=1.0
           Type=Application
           Name=GoLand
-          Icon=/opt/GoLand-${JETBRAINS_VERSION}/bin/goland.png
-          Exec=/opt/GoLand-${JETBRAINS_VERSION}/bin/goland.sh
+          Icon=/opt/GoLand-${GoLand_VERSION}/bin/goland.png
+          Exec=/opt/GoLand-${GoLand_VERSION}/bin/goland.sh
           Terminal=false
           Categories=Development;IDE;" >>/usr/share/applications/jetbrains-goland.desktop
   rm -rf /tmp/goland.tar.gz
