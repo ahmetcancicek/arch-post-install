@@ -20,15 +20,15 @@ EOL
 fi
 
 # Set Version
-IntelliJIDEA_VERSION=2024.2.0.2
-DataGrip_VERSION=2024.2.1
-GoLand_VERSION=2024.2.0.2
-GO_VERSION=1.22.5
-POSTMAN_VERSION=11.9
+IntelliJIDEA_VERSION=2024.2.1
+DataGrip_VERSION=2024.2.2
+GoLand_VERSION=2024.2.1.1
+GO_VERSION=1.23.1
+POSTMAN_VERSION=11.12
 MAVEN=3
-MAVEN_VERSION=3.9.8
-GRADLE_VERSION=8.9
-SPRING_VERSION=3.3.1
+MAVEN_VERSION=3.9.9
+GRADLE_VERSION=8.10.1
+SPRING_VERSION=3.3.3
 ANKI_VERSION=24.06.3
 DROIDCAM_VERSION=2.1.3
 
@@ -127,6 +127,14 @@ install_gnome_tool() {
   # Monitor scaling
   gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer','kms-modifiers']"
 
+  print_installation_message_success Extensions
+}
+
+# KDE
+install_kde_tool(){
+  # KDE
+  print_installation_message Extensions
+  pacman -S --noconfirm gwenview
   print_installation_message_success Extensions
 }
 
