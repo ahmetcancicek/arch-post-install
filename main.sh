@@ -31,6 +31,7 @@ GRADLE_VERSION=8.10.1
 SPRING_VERSION=3.3.3
 ANKI_VERSION=24.06.3
 DROIDCAM_VERSION=2.1.3
+ZOOM_VERSION=6.2.5.2440
 
 # Get USER name
 USER=$(logname)
@@ -164,7 +165,7 @@ install_spotify() {
 # Zoom
 install_zoom() {
   print_installation_message Zoom
-  wget https://zoom.us/client/5.16.2.8828/zoom_x86_64.pkg.tar.xz
+  wget https://zoom.us/client/${ZOOM_VERSION}/zoom_x86_64.pkg.tar.xz
   pacman -U --noconfirm zoom_x86_64.pkg.tar.xz
   print_installation_message_success Zoom
 }
