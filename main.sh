@@ -61,6 +61,9 @@ essentials=(
   dosfstools
   dialog
   unzip
+  wl-clipboard
+  sed
+  coreutils
 )
 
 printf "\n${BLUE}========================Installing standard package $1========================${ENDCOLOR}\n"
