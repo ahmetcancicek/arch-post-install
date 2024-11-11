@@ -32,6 +32,7 @@ SPRING_VERSION=3.3.3
 ANKI_VERSION=24.06.3
 DROIDCAM_VERSION=2.1.3
 ZOOM_VERSION=6.2.5.2440
+ZOTERO_VERSION=7.0.9
 
 # Get USER name
 USER=$(logname)
@@ -410,6 +411,24 @@ install_intellij_idea() {
         StartupNotify=true;" >>/usr/share/applications/jetbrains-idea.desktop
   rm -rf /tmp/ideaIU.tar.gz
   print_installation_message_success IntelliJIDEA
+}
+
+install_zotero(){
+  print_installation_message Zotero
+  wget https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=${ZOTERO_VERSION} -O zotero.tar.bz2
+  tar -xjf Zotero-7.0.9_linux-x86_64.tar.bz2
+  mv Zotero_linux-x86_64 /opt/zotero
+  echo "[Desktop Entry]
+        Name=Zotero
+        #Exec=bash -c "$(dirname $(realpath $(echo %k | sed -e 's/^file:\\/\\///')))/zotero -url %U"
+        Exec=/opt/zotero/zotero
+        Icon=/opt/zotero/icons/icon128.png
+        Type=Application
+        Terminal=false
+        Categories=Office;
+        MimeType=text/plain;x-scheme-handler/zotero;application/x-research-info-systems;text/x-research-info-systems;text/ris;application/x-endnote-refer;application/x-inst-for-Scientific-info;application/mods+xml;application/rdf+xml;application/x-bibtex;text/x-bibtex;application/marc;application/vnd.citationstyles.style+xml
+        X-GNOME-SingleWindow=true;" >> /usr/share/applications/zotero.desktop
+  print_installation_message_success Zotero
 }
 
 # DataGrip
