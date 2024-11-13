@@ -325,22 +325,26 @@ install_openJDK(){
 # ORACLE JAVA JDK 18 &  ORACLE JAVA JDK 21 & ORACLE JAVA JDK 17 && SPRING BOOT CLI
 install_javaJDK() {
   print_installation_message JAVA
+
+  wget https://download.oracle.com/java/23/latest/jdk-23_linux-x64_bin.tar.gz
+  tar xf jdk-23_linux-x64_bin.tar.gz
+  mv jdk-23.* jdk-23
+ touch /etc/profile.d/jdk23.sh
+  echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk23.sh
+  echo 'JAVA_HOME=/usr/lib/jvm/jdk-23' >> /etc/profile.d/jdk23.sh
+  chmod +x /etc/profile.d/jdk23.sh
+  source /etc/profile.d/jdk23.sh
+  archlinux-java set jdk-23
+
   wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
   tar xf jdk-21_linux-x64_bin.tar.gz
   mv jdk-21.* jdk-21
   mv jdk-21 /usr/lib/jvm
-  touch /etc/profile.d/jdk21.sh
-  echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk21.sh
-  echo 'JAVA_HOME=/usr/lib/jvm/jdk-21' >> /etc/profile.d/jdk21.sh
-  chmod +x /etc/profile.d/jdk21.sh
-  source /etc/profile.d/jdk21.sh
-  archlinux-java set jdk-21
 
-  wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-  tar xf jdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm
-
-  rm -rf /tmp/jdk-21_linux-x64_bin.tar.gz
-  rm -rf /tmp/jdk-17_linux-x64_bin.tar.gz
+  wget https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-x64_bin.tar.gz
+  tar xf jdk-17.0.12_linux-x64_bin.tar.gz -C /usr/lib/jvm
+  mv jdk-17.* jdk-17
+  mv jdk-17 /usr/lib/jvm
   print_installation_message_success JAVA
 
   # Install Sprint CLI
