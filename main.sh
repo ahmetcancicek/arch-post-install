@@ -329,7 +329,7 @@ install_javaJDK() {
   wget https://download.oracle.com/java/23/latest/jdk-23_linux-x64_bin.tar.gz
   tar xf jdk-23_linux-x64_bin.tar.gz
   mv jdk-23.* jdk-23
- touch /etc/profile.d/jdk23.sh
+  touch /etc/profile.d/jdk23.sh
   echo -e '\n# JAVA Configuration' >> /etc/profile.d/jdk23.sh
   echo 'JAVA_HOME=/usr/lib/jvm/jdk-23' >> /etc/profile.d/jdk23.sh
   chmod +x /etc/profile.d/jdk23.sh
@@ -420,7 +420,7 @@ install_intellij_idea() {
 install_zotero(){
   print_installation_message Zotero
   wget https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64&version=${ZOTERO_VERSION} -O zotero.tar.bz2
-  tar -xjf Zotero-7.0.9_linux-x86_64.tar.bz2
+  tar -xjf zotero.tar.bz2
   mv Zotero_linux-x86_64 /opt/zotero
   echo "[Desktop Entry]
         Name=Zotero
