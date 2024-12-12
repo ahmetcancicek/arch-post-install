@@ -435,6 +435,15 @@ install_zotero(){
   print_installation_message_success Zotero
 }
 
+install_cursor(){
+  print_installation_message Cursor
+  wget https://downloader.cursor.sh/linux/appImage/x64 -O ./cursor.AppImage
+  chmod +x ./cursor.AppImage
+  mkdir /opt/cursor
+  mv cursor.AppImage /opt/cursor
+  print_installation_message_success Cursor
+}
+
 # DataGrip
 install_datagrip() {
   print_installation_message DataGrip
